@@ -1,14 +1,25 @@
 # API
+## Python API
 
-Application Programming Interface.
-
-Used to talk to any foreign server so we can gather information from them
-
-API saves a lot of time.
+### What is an API?
+Application Programming Interface. They are used to talk to any foreign server so we can gather
+information from them
+### Benefits of an API
+- API saves a lot of time.
+- Ease of integration
+- Automating tasks
 
 ![img.png](img.png)
 
+### Python requests
+```python
+import requests
 
+r = requests.get("https://www.bbc.co.uk/")
+
+print(r.status_code)
+```
+### America Weather Alerts by State
 ```python
 import requests
 import json

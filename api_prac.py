@@ -16,7 +16,7 @@ class WeatherAmerica:
         "learningapirequests, sam.dennis0000@gmail.com"}
 
         r = requests.get(f"https://api.weather.gov/alerts/active?area={self.state}", headers=headers)
-        data = json.loads(r.content)
+        data = json.loads(r.text)
         with open(f"weather_{self.state}.json","w") as f:
             json.dump(data, f)
 
