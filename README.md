@@ -47,7 +47,49 @@ def status_code_check(url):
         return f"The server is live. Status code: {r.status_code}"
     return f"The server is unavailable. Status code: {r.status_code}"
 ```
+### Postcode checker
+```python
+class PostcodeChecker:
+    def __init__(self, postcode):
+        base_url = "http://api.postcodes.io/postcodes/"
+        self.postcode = postcode
+        self.url = base_url + self.postcode
+        r = requests.get(self.url)
+        self.data = r.json()
+        self.confirm_postcode()
 
+    def confirm_postcode(self):
+        user_input = input("Please confirm your postcode. ").lower()
+        if user_input != self.postcode:
+            print("That was the incorrect postcode")
+
+
+    def get_postcode(self):
+        for key in self.data["result"].keys():
+            if key == "postcode":
+                return self.data["result"][key]
+
+    def get_latitude(self):
+        for key in self.data["result"].keys():
+            if key == "latitude":
+                return self.data["result"][key]
+
+    def get_longitude(self):
+        for key in self.data["result"].keys():
+            if key == "longitude":
+                return self.data["result"][key]
+```
+
+```python
+from post_code_api import PostcodeChecker
+
+postcode = PostcodeChecker("rm137bs")
+print(postcode.get_postcode())
+print(postcode.get_latitude())
+print(postcode.get_longitude())
+```
+
+![img_1.png](img_1.png)
 ### America Weather Alerts by State
 ```python
 import requests

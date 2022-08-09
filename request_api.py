@@ -22,9 +22,25 @@ from bs4 import BeautifulSoup
 # else:
 #     print(f"Oops! Status code: {r.status_code}")
 
-def status_code_check(url):
-    r = requests.get(url)
-    if r:
-        return f"The server is live. Status code: {r.status_code}"
-    return f"The server is unavailable. Status code: {r.status_code}"
 
+class WebScraper:
+    def __init__(self, url):
+        """Retrieves the website"""
+        self.url = url
+        self.r = requests.get(self.url)
+    def status_code_check(self):
+        """Returns the status code with a message"""
+        if self.r:
+            return f"The server is live. Status code: {self.r.status_code}"
+        return f"The server is unavailable. Status code: {self.r.status_code}"
+
+    def get_content(self):
+        """Processes the content and parses HTML"""
+        contents = self.r.text
+        soup = BeautifulSoup(contents)
+        return soup.prettify()
+
+
+bbc = WebScraper("https://www.bbc.co.uk/")
+print(bbc.status_code_check())
+print(bbc.get_content())
