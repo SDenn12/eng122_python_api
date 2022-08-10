@@ -42,10 +42,12 @@ class PostcodeChecker:
     def __init__(self, postcode):
         base_url = "http://api.postcodes.io/postcodes/"
         self.postcode = postcode
+        self.confirm_postcode()
+        
         self.url = base_url + self.postcode
         r = requests.get(self.url)
         self.data = r.json()
-        self.confirm_postcode()
+
 
     def confirm_postcode(self):
         user_input = input("Please confirm your postcode. ").lower()
